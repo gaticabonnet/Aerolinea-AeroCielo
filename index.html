@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aerolínea AeroCielo</title>
+  <meta name="description" content="Aerolínea AeroCielo - vuelos, reservas y destinos" />
+  <style>
+    :root{
+      --celeste: #7ec8e3; /* celeste */
+      --verde: #7bd389;   /* verde */
+      --blanco: #ffffff;
+      --bg: #f7fcff; /* very light */
+      --card: rgba(255,255,255,0.85);
+      --radius: 12px;
+      --maxw: 1100px;
+      --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);background:linear-gradient(180deg,var(--bg),#e9f7fb);color:#08303a}
+    .container{max-width:var(--maxw);margin:0 auto;padding:1.25rem}
+
+    header{background:linear-gradient(90deg,var(--celeste),var(--verde));color:var(--blanco);padding:.9rem 0;box-shadow:0 6px 18px rgba(10,30,35,0.08)}
+    .brand{display:flex;gap:1rem;align-items:center}
+    .logo{width:52px;height:52px;border-radius:10px;background:rgba(255,255,255,0.14);display:grid;place-items:center;font-weight:800}
+    nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+    nav a{color:var(--blanco);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+    nav a:hover, nav a.active{background:rgba(255,255,255,0.12)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:1.2rem;align-items:center;padding:2rem 0}
+    .hero h1{font-size:clamp(1.4rem,3.5vw,2.4rem);margin:0}
+    .hero p{margin:.6rem 0;color:rgba(0,0,0,0.6)}
+    .btn{display:inline-block;padding:.7rem 1rem;background:var(--celeste);color:#042a2a;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* Card */
+    .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:0 6px 20px rgba(10,30,35,0.06)}
+
+    /* Form */
+    form{display:grid;gap:.6rem}
+    input,select,button{padding:.6rem;border-radius:8px;border:1px solid rgba(0,0,0,0.08);font-size:0.95rem}
+    button{background:var(--verde);color:#042a2a;border:0;font-weight:800;cursor:pointer}
+
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+    .service{padding:1rem;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.98));border:1px solid rgba(0,0,0,0.04)}
+
+    /* Carousel */
+    .carousel{position:relative;border-radius:12px;overflow:hidden}
+    .slides{display:flex;transition:transform .5s ease}
+    .slide{min-width:100%;height:320px;background-size:cover;background-position:center}
+    .controls{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 10px}
+    .control{background:rgba(0,0,0,0.35);color:#fff;padding:8px;border-radius:8px;border:0;cursor:pointer}
+    .dots{display:flex;gap:.4rem;justify-content:center;padding:.6rem}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,0.2);cursor:pointer}
+    .dot.active{background:var(--celeste)}
+
+    /* Destinos grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .dest{border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(10,30,35,0.06)}
+    .dest img{width:100%;height:160px;object-fit:cover;display:block}
+    .dest .info{padding:10px;background:#fff}
+
+    footer{padding:2rem 0;text-align:center;color:rgba(0,0,0,0.6)}
+
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.services{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+      <div class="brand">
+        <div class="logo">AC</div>
+        <div>
+          <div style="font-weight:800">AeroCielo</div>
+          <div style="font-size:.85rem;opacity:.9">Vuela sencillo · Llega feliz</div>
+        </div>
+      </div>
+      <nav aria-label="principal">
+        <ul>
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#reservar" class="nav-link">Reservar</a></li>
+          <li><a href="#servicios" class="nav-link">Servicios</a></li>
+          <li><a href="#informacion" class="nav-link">Información</a></li>
+          <li><a href="#destinos" class="nav-link">Destinos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="inicio" class="hero">
+      <div>
+        <h1>Bienvenidos a AeroCielo</h1>
+        <p>Conectamos las ciudades que querés con tarifas competitivas y una atención pensada para vos.</p>
+        <a class="btn" href="#reservar">Reservar ahora</a>
+
+        <div style="margin-top:1rem" class="card">
+          <strong>Promoción:</strong> 20% dto en rutas seleccionadas hasta fin de mes.
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Búsqueda rápida</h3>
+        <form id="buscarForm">
+          <label>Origen
+            <input type="text" id="origen" placeholder="Ciudad de origen" required>
+          </label>
+          <label>Destino
+            <input type="text" id="destino" placeholder="Ciudad destino" required>
+          </label>
+          <label>Fecha
+            <input type="date" id="fecha" required>
+          </label>
+          <button type="submit">Buscar vuelos</button>
+        </form>
+      </aside>
+    </section>
+
+    <section id="reservar">
+      <h2>Reservar</h2>
+      <p>Completá los datos para reservar tu vuelo.</p>
+      <div class="card">
+        <form id="reservaForm">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+            <input type="text" id="nombre" placeholder="Nombre completo" required>
+            <input type="email" id="email" placeholder="Email" required>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem">
+            <input type="text" id="origenR" placeholder="Origen" required>
+            <input type="text" id="destinoR" placeholder="Destino" required>
+          </div>
+          <div style="display:flex;gap:.6rem;margin-top:.6rem">
+            <input type="date" id="fechaR" required>
+            <select id="claseR">
+              <option value="economy">Economy</option>
+              <option value="premium">Premium</option>
+              <option value="business">Business</option>
+            </select>
+          </div>
+          <button type="submit" style="margin-top:.6rem">Confirmar reserva</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <h2>Servicios</h2>
+      <div class="services">
+        <div class="service">
+          <h3>Equipaje incluido</h3>
+          <p>Una pieza de equipaje de mano y una de bodega en tarifas seleccionadas.</p>
+        </div>
+        <div class="service">
+          <h3>Check-in online</h3>
+          <p>Evita filas: hacé tu check-in desde la app o la web.</p>
+        </div>
+        <div class="service">
+          <h3>Asistencia 24/7</h3>
+          <p>Equipo de soporte disponible para ayudarte en todo momento.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="informacion">
+      <h2>Información</h2>
+      <p class="card">Políticas de equipaje, mascotas, cambios y reembolsos. Consultá aquí antes de viajar para evitar inconvenientes.</p>
+    </section>
+
+    <section id="destinos">
+      <h2>Destinos destacados</h2>
+      <p>Explorá algunos de nuestros destinos más populares.</p>
+
+      <!-- Carousel -->
+      <div class="carousel card" id="carousel">
+        <div class="slides" id="slides">
+          <div class="slide" style="background-image:url('./banner-rio.jpg')"></div>
+          <div class="slide" style="background-image:url('./-barcelona-banner.jpg')"></div>
+          <div class="slide" style="background-image:url('./londres-2025.avif')"></div>
+        </div>
+        <div class="controls">
+          <button class="control" id="prev">◀</button>
+          <button class="control" id="next">▶</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+
+      <div class="grid" style="margin-top:1rem">
+        <article class="dest">
+          <img src="./images-paris.jpg" alt="París">
+          <div class="info">
+            <strong>París</strong>
+            <p>Ruta directa, temporada alta y tours incluidos.</p>
+          </div>
+        </article>
+        <article class="dest">
+          <img src="./new-york-city.jpg" alt="Nueva York">
+          <div class="info">
+            <strong>Nueva York</strong>
+            <p>Conexiones diarias, mejores tarifas en martes y miércoles.</p>
+          </div>
+        </article>
+        <article class="dest">
+          <img src="./santiago-de-chile.avif" alt="Santiago">
+          <div class="info">
+            <strong>Santiago</strong>
+            <p>Vuelos regionales y opciones económicas.</p>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> AeroCielo · Todos los derechos reservados
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple form handlers
+    document.getElementById('buscarForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+      const fecha = document.getElementById('fecha').value;
+      alert(`Buscando vuelos de ${origen} a ${destino} para el ${fecha}...`);
+    });
+
+    document.getElementById('reservaForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      alert(`Reserva confirmada para ${nombre}. Te llegara un email con los detalles (simulado).`);
+      this.reset();
+    });
+
+    // Carousel logic
+    (function(){
+      const slides = document.getElementById('slides');
+      const slideCount = slides.children.length;
+      const dots = document.getElementById('dots');
+      let index = 0;
+      let interval = null;
+
+      function renderDots(){
+        for(let i=0;i<slideCount;i++){
+          const d = document.createElement('div');
+          d.className='dot' + (i===0? ' active':'');
+          d.dataset.i = i;
+          d.addEventListener('click', ()=>{ goTo(i); resetAuto(); });
+          dots.appendChild(d);
+        }
+      }
+      function update(){
+        slides.style.transform = `translateX(${-index * 100}%)`;
+        [...dots.children].forEach((d,i)=> d.classList.toggle('active', i===index));
+      }
+      function next(){ index = (index+1)%slideCount; update(); }
+      function prev(){ index = (index-1+slideCount)%slideCount; update(); }
+      function goTo(i){ index = i; update(); }
+      function startAuto(){ interval = setInterval(next, 4000); }
+      function resetAuto(){ clearInterval(interval); startAuto(); }
+
+      document.getElementById('next').addEventListener('click', ()=>{ next(); resetAuto(); });
+      document.getElementById('prev').addEventListener('click', ()=>{ prev(); resetAuto(); });
+
+      renderDots(); startAuto();
+    })();
+
+    // Simple nav active update on click
+    document.querySelectorAll('nav a').forEach(a=> a.addEventListener('click', ()=>{
+      document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+    }));
+  </script>
+</body>
+</html>
